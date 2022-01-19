@@ -8,6 +8,7 @@ import '../App.css';
 import { useState, useRef, useCallback } from 'react';
 import ForceGraph3D from 'react-force-graph-3d';
 import ModalContent from './ModalContent';
+import data from '../data'
 
 const style = {
     position: 'absolute',
@@ -31,12 +32,15 @@ const style = {
     p: 4,
 };
 
-const data = { "nodes": [ { "id": "Linear Independence", "group": 1, "content":  "# Linear Independence \n A list of vectors is linearly independent if the only way to create a linear combination equal to zero is to set all constants multiplying the vectors to zero." }, { "id": "Linear Dependence", "group": 1, "content":  "# Linear Dependence \n A list of vectors is linearly dependent if there is a linear combination with not all coefficients equal to 0 that can result in a combination equal to 0." }, ], "links": [ { "source": "Linear Independence", "target": "Linear Dependence", "value": 1, "Content":  "Linear Independence and Linear Dependence are opposite terms dealing with the same concept of unique information. A Linearly Independent list contains vectors that each provide some form of new information, whereas in a Linearly Dependent list there are vectors that provide only repetitive information: they are in the span of the other vectors." }, ] }
+//const data = { "nodes": [ { "id": "Linear Independence", "group": 1, "content":  "# Linear Independence \n A list of vectors is linearly independent if the only way to create a linear combination equal to zero is to set all constants multiplying the vectors to zero." }, { "id": "Linear Dependence", "group": 1, "content":  "# Linear Dependence \n A list of vectors is linearly dependent if there is a linear combination with not all coefficients equal to 0 that can result in a combination equal to 0." }, ], "links": [ { "source": "Linear Independence", "target": "Linear Dependence", "value": 1, "Content":  "Linear Independence and Linear Dependence are opposite terms dealing with the same concept of unique information. A Linearly Independent list contains vectors that each provide some form of new information, whereas in a Linearly Dependent list there are vectors that provide only repetitive information: they are in the span of the other vectors." }, ] }
+
+
 
 const Graph = (props) => {
     const [open, setOpen] = useState(false);
     const [curNode, setCurNode] = useState(null);
     const handleOpen = (e) => {
+	console.log(e)
 	setCurNode(e)
 	setOpen(true);
     }
@@ -44,6 +48,15 @@ const Graph = (props) => {
 
     const fgRef = useRef();
     const handleClick = useCallback(node => {
+	let links = data['links'].filter((v) =>
+	    {
+		if (v.source.id == node.id || v.target.id == node.id) {
+		    return v
+		}
+	    }
+	)
+	console.log(links)
+	//console.log(data['links'])
 	//console.log(node)
 	handleOpen(node);
 	const distance = 40;
