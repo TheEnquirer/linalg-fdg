@@ -4,11 +4,23 @@ import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { languages } from '@codemirror/language-data';
 import { oneDark } from '@codemirror/theme-one-dark';
 import '../App.css';
+import data from '../data'
 
 const ModalContent = (props) => {
     //console.log(Object.keys(props.node), props.node, "the content??")
     //console.log(props.node.content)
     const [ev, setEv] = useState(props.node.content)
+    const getLinks = () => {
+	let links = data['links'].filter((v) =>
+	    {
+		if (v.source.id == props.node.id || v.target.id == props.node.id) {
+		    return v
+		}
+	    }
+	)
+	//console.log(links)
+	return links
+    }
 
     return (
 	<div className="h-full overflow-auto border-0 border-red-400">
@@ -16,7 +28,7 @@ const ModalContent = (props) => {
 	    <CodeMirror
 		value={ev} 
 		theme={oneDark}
-		lineNumbers={false}
+		//lineNumbers={false}
 		//className="h-full"
 		onChange={(e) => {
 		    setEv(e)
@@ -37,6 +49,12 @@ const ModalContent = (props) => {
 		//}}
 
 	    />
+	    {getLinks().map((i) => {
+		return (
+		    <div>{i.Content}</div>
+		)
+	    })}
+	    {/*{console.log(getLi*/}
 	</div>
     );
 }
