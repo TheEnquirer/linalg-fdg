@@ -1,8 +1,22 @@
+.segment {
+    border-left: 1px solid red;
+
+}
+
+/***************************************************/
+/***************************************************/
+/***************************************************/
+
+.react-icons {
+  vertical-align: middle;
+}
+
+
 .cm-editor {
     /*border: 1px solid red;*/
     word-break: break-word;
     height:100%;
-    font-size: 16px;
+    font-size: 14px;
     padding: 1rem;
     border-radius: 8px;
 
@@ -25,4 +39,30 @@
 
 .cke_reset_all .CodeMirror-scroll * {
     white-space: pre-wrap;
+}
+
+.cm-gutterElement {
+    display: none;
+}
+.cm-line {
+    line-height: 2 !important;
+}
+
+.cm-activeLine {
+    border-radius: 3px;
+
+}
+
+.ͼ11 {
+    color: #8c76cf;
+    font-weight: 900;
+    /*font-size: 20px;*/
+    /*@apply: font-black border-2 border-red-500;*/
+
+}
+
+.ͼ13 {
+    color: #98c379 !important;
+    font-stretch: ultra-expanded !important;
+    /*font-size: 20px;*/
 }
