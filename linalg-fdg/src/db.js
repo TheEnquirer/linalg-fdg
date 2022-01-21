@@ -25,6 +25,7 @@ export async function addNode(obj) {
 }
 
 export async function updateNode(obj) {
+    console.log('updating node', obj)
     // TODO: untested
     const { d, e } = await client
         .from('nodes')

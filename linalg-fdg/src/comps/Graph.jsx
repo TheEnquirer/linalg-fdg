@@ -159,7 +159,7 @@ const Graph = (props) => {
 
     const handleNodeUpdate = (node) => {
 	//console.log(node)
-	updateEdge(node)
+	updateNode(node)
     }
 
     useEffect(() => {
