@@ -4,9 +4,10 @@ import update from "react-addons-update";
 
 import { supabase_url, supabase_pubkey } from './secrets';
 import data from './data';
-console.log(data)
+//data.nodes = data.nodes.map(v => ({ id: v.id, content: v.content, group: v.group }))
+//console.log(JSON.stringify(data))
 
-setTimeout(() => console.log(data), 1000);
+//setTimeout(() => console.log(data), 1000);
 
 const client = createClient(supabase_url, supabase_pubkey);
 data.nodes.forEach(n => addNode(n));
@@ -79,8 +80,8 @@ function useDatabase() {
             case "INSERT": return update(state, { [action.table]: { $push: [action.new] } });
             case "UPDATE":
                 switch (action.table) {
-                    case "nodes": return { nodes: state.nodes.map(v => v.id == action.old.id ? action.new : v) };
-                    case "edges": return { edges: state.edges.map(v =>
+                    case "nodes": console.log('update nodes, returning', state.nodes.map(v => v.id == action.old.id ? action.new : v)); return { nodes: state.nodes.map(v => v.id == action.old.id ? action.new : v) };
+                    case "edges": return { links: state.links.map(v =>
                         (v.source == action.old.source && v.target == action.old.target) ?
                         action.new : v
                     ) };
