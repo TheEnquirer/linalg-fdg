@@ -40,32 +40,57 @@ const Graph = (props) => {
     const [open, setOpen] = useState(false);
     const [curNode, setCurNode] = useState(null);
     const handleOpen = (e) => {
-	console.log(e)
+	//console.log(e)
 	setCurNode(e)
 	setOpen(true);
     }
     const handleClose = (e) => { setOpen(false) }
 
     const fgRef = useRef();
-    const handleClick = useCallback(node => {
-	let links = data['links'].filter((v) =>
-	    {
-		if (v.source.id == node.id || v.target.id == node.id) {
-		    return v
+
+    const getNodeFromName = (name) => {
+	let nodes = fgRef.current.scene().children[3].children
+	//console.log(nodes)
+	for (const node of nodes) {
+	    if (node.__graphObjType == 'node') {
+		if (node.__data.id == name) {
+		    return node.__data
 		}
 	    }
-	)
-	console.log(links)
-	//console.log(data['links'])
-	//console.log(node)
+	}
+    }
+
+    const focusNode = useCallback(node => {
 	handleOpen(node);
 	const distance = 40;
 	const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
 	fgRef.current.cameraPosition(
-	    { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
-	    node, // lookAt ({ x, y, z })
-	    1000  // ms transition duration
+	    { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
+	    node,
+	    1000
 	);
+    }, [fgRef]);
+
+    const handleClick = useCallback(node => {
+	focusNode(node)
+	//console.log(node)
+	//focusNode(getNodeFromName("Vectors"))
+
+	//let links = data['links'].filter((v) =>
+	//    {
+	//        if (v.source.id == node.id || v.target.id == node.id) {
+	//            return v
+	//        }
+	//    }
+	//)
+	//handleOpen(node);
+	//const distance = 40;
+	//const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+	//fgRef.current.cameraPosition(
+	//    { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
+	//    node, // lookAt ({ x, y, z })
+	//    1000  // ms transition duration
+	//);
     }, [fgRef]);
 
     return (
@@ -82,6 +107,9 @@ const Graph = (props) => {
 		//linkCurvature={0.1}
 		linkDirectionalParticles={1}
 		linkDirectionalParticleResolution={12}
+		scene={(e) => {
+		    console.log(e)
+		}}
 		//nodeColor={'#d65d0e'}
 		//nodeAutoColorBy={'red'}
 		//backgroundColor={'#303030'}
