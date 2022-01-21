@@ -219,10 +219,7 @@ const ModalContent = (props) => {
 	    >
 		<Fade in={addingLink}>
 		    <Box sx={addStyle}>
-			{/*<ModalContent node={curNode} />*/}
-			{/*<NodeAdder handleNodeAddition={handleNodeAddition}/>*/}
 			<LinkAdder data={props.data}/>
-
 		    </Box>
 		</Fade>
 	    </Modal>

@@ -158,7 +158,8 @@ const Graph = (props) => {
     }
 
     const handleNodeUpdate = (node) => {
-	console.log(node)
+	//console.log(node)
+	updateEdge(node)
     }
 
     useEffect(() => {
