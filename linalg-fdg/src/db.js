@@ -82,8 +82,8 @@ function useDatabase() {
             case "INSERT": return update(state, { [action.table]: { $push: [action.new] } });
             case "UPDATE":
                 switch (action.table) {
-                    case "nodes": console.log('update nodes, returning', state.nodes.map(v => v.id == action.old.id ? action.new : v)); return { nodes: state.nodes.map(v => v.id == action.old.id ? action.new : v) };
-                    case "links": return { links: state.links.map(v =>
+                    case "nodes": return { ...state, nodes: state.nodes.map(v => v.id == action.old.id ? action.new : v) };
+                    case "links": return { ...state, links: state.links.map(v =>
                         (v.source == action.old.source && v.target == action.old.target) ?
                         action.new : v
                     ) };
@@ -102,13 +102,15 @@ function useDatabase() {
         //    .from('edges').on('INSERT', handleEdgeInsert)
         //                  .on('UPDATE', handleEdgeUpdate)
         //    .subscribe();
-        //const subscriptions = client.from('*').on('*', dispatch).subscribe();
-        const subscriptions = client
-            .from('nodes')
-            .on('*', (e) => {
-                console.log('aonetkoenuhxrygxbenhuxbrceidxnebuxrcdeuxrcd')
-                dispatch(e)
-            }).subscribe();
+        //
+        const subscriptions = client.from('*').on('*', dispatch).subscribe();
+
+        //const subscriptions = client
+        //    .from('nodes')
+        //    .on('*', (e) => {
+        //        console.log('aonetkoenuhxrygxbenhuxbrceidxnebuxrcdeuxrcd')
+        //        dispatch(e)
+        //    }).subscribe();
         console.log('subscrobe')
 
         //return () => { client.removeSubscription(subscriptions); };
