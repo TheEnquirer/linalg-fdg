@@ -51,9 +51,10 @@ const useFocus = () => {
 const Searcher = (props) => {
     const filterOptions = (options, { inputValue }) => matchSorter(options, inputValue);
     const [inputRef, setInputFocus] = useFocus()
-    const [inpVal, setInpVal] = useState("hii")
+    const [inpVal, setInpVal] = useState(null)
     //const [m, setM] = useState()
     let dataOptions = data.nodes.map((n) => { return { title: n.id, node: n } })
+    //console.log(dataOptions.map(v => v.title))
 
     return (
 	<div className="flex items-center justify-center h-full border-0 border-red-500">
@@ -61,17 +62,20 @@ const Searcher = (props) => {
 	    <Autocomplete
 		disablePortal
 		PopperComponent={StyledPopper}
-		value={inpVal}
-		onChange={(event, newValue) => {
-		    setInpVal(newValue);
-		}}
+		//value={inpVal}
+		autoComplete={true}
+		autoHighlight={true}
+		//onInputChange={(event, newValue, reason) => {
+		//    setInpVal(newValue);
+		//}}
 		onKeyDown={(e) => {
 		    if (e.code == "Enter") {
-			let ms = []
-			for (const i of dataOptions) {
-			    console.log(match(i.title, inpVal))
-			}
-			//console.log(m)
+			setTimeout(function(){
+			    console.log(e.target.value)
+			    if (dataOptions.map(v => v.title).includes(e.target.value)) {
+				props.handleSearchSubmit(e.target.value)
+			    }
+			}, 0);
 		    }
 		}}
 

@@ -96,6 +96,15 @@ const Graph = (props) => {
 	}
     }
 
+    const handleSearchSubmit = (name) => {
+	handleClose()
+	handleSearchEnd()
+	//focusNode(getNodeFromName(name))
+	setTimeout(function(){
+	    focusNode(getNodeFromName(name))
+	}, 187);
+    }
+
     useEffect(() => {
 	document.addEventListener("keydown", handleKeyDown.bind(this))
     }, [])
@@ -156,7 +165,9 @@ const Graph = (props) => {
 		    <Fade in={searching}>
 			<Box sx={searchStyle}>
 			    {/*<ModalContent node={curNode} />*/}
-			    <Searcher />
+			    <Searcher 
+				handleSearchSubmit={handleSearchSubmit}
+			    />
 			</Box>
 		    </Fade>
 		</Modal>
