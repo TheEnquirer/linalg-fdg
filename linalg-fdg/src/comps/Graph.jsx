@@ -5,7 +5,8 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import '../App.css';
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
+import { withShortcut, ShortcutProvider, ShortcutConsumer } from 'react-keybind'
 import ForceGraph3D from 'react-force-graph-3d';
 import ModalContent from './ModalContent';
 import Searcher from './Searcher';
@@ -23,14 +24,14 @@ const style = {
     borderRadius: "8px",
     outline: "none",
     backgroundColor: "#202024",
-    //p: 4,
+    p: 4,
 };
 
 const searchStyle = {
     position: 'absolute',
     top: '4rem',
     width: "35rem",
-    height: "6rem",
+    height: "5rem",
     left: "0",
     right: "0",
     margin: "auto",
@@ -85,9 +86,19 @@ const Graph = (props) => {
     }, [fgRef]);
 
     const handleClick = useCallback(node => {
-	//focusNode(node)
-	handleSearchStart()
+	focusNode(node)
+	//handleSearchStart()
     }, [fgRef]);
+
+    const handleKeyDown = (e) => {
+	if (e.ctrlKey && e.which === 75) {
+	    setSearching(true)
+	}
+    }
+
+    useEffect(() => {
+	document.addEventListener("keydown", handleKeyDown.bind(this))
+    }, [])
 
     return (
 	<>

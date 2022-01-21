@@ -42,7 +42,7 @@ const StyledPopper = styled(Popper)({
 const useFocus = () => {
     const htmlElRef = useRef(null)
     const setFocus = () => {
-	console.log(htmlElRef)
+	//console.log(htmlElRef)
 	htmlElRef.current &&  htmlElRef.current.focus()
     }
 
@@ -51,6 +51,9 @@ const useFocus = () => {
 const Searcher = (props) => {
     const filterOptions = (options, { inputValue }) => matchSorter(options, inputValue);
     const [inputRef, setInputFocus] = useFocus()
+    const [inpVal, setInpVal] = useState("hii")
+    //const [m, setM] = useState()
+    let dataOptions = data.nodes.map((n) => { return { title: n.id, node: n } })
 
     return (
 	<div className="flex items-center justify-center h-full border-0 border-red-500">
@@ -58,17 +61,29 @@ const Searcher = (props) => {
 	    <Autocomplete
 		disablePortal
 		PopperComponent={StyledPopper}
-		//filterOptions={filterOptions}
+		value={inpVal}
+		onChange={(event, newValue) => {
+		    setInpVal(newValue);
+		}}
+		onKeyDown={(e) => {
+		    if (e.code == "Enter") {
+			let ms = []
+			for (const i of dataOptions) {
+			    console.log(match(i.title, inpVal))
+			}
+			//console.log(m)
+		    }
+		}}
+
 		id="combo-box-demo"
 		autoFocus
-		options={top100Films}
+		options={dataOptions}
 		getOptionLabel={(option) => option.title}
 		sx={{ 
 		    width: "100%",
 		    pl: 2,
 		    pr: 2,
 		    marginTop: "-0.4rem",
-		    //outline: "red",
 		    color: "white !important",
 		    '& .MuiAutocomplete-endAdornment': {
 			display: "none"
@@ -132,20 +147,3 @@ const Searcher = (props) => {
 }
 
 export default Searcher;
-
-
-
-
-const top100Films = [
-  { title: 'The Shawshank Redemption', year: 1994 },
-  { title: 'The Godfather', year: 1972 },
-  { title: 'The Godfather: Part II', year: 1974 },
-  { title: 'The Dark Knight', year: 2008 },
-  { title: '12 Angry Men', year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: 'Pulp Fiction', year: 1994 },
-  {
-    title: 'The Lord of the Rings: The Return of the King', year: 2003, },
-  { title: 'The Good, the Bad and the Ugly', year: 1966 },
-  { title: 'Fight Club', year: 1999 },
-];
