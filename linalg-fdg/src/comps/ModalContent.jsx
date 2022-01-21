@@ -66,33 +66,6 @@ const ModalContent = (props) => {
 		    ]}
 
 		/>
-		<div className="flex flex-row items-center mt-3">
-		    <p className="mr-2 text-gray-100"> Group: </p>
-		    <CodeMirror
-			value={group}
-			theme={'dark'}
-			width={"10rem"}
-			onChange={(e) => {
-			    setGroup(e)
-			}}
-			extensions={[
-			    markdown({ base: markdownLanguage, codeLanguages: languages })
-			]}
-
-		    />
-		    <div className="items-center justify-center p-2 ml-4 text-sm font-bold text-center text-gray-300 align-middle rounded bg-slate-700 hover:bg-slate-600 transition"
-			    onClick={() => {
-				props.handleNodeUpdate(
-				    { 
-					id: name,
-					group: group,
-					content: ev,
-				    }
-				)
-			    }}>
-			    Push Changes
-			</div>
-		</div>
 	    </div>
 	    <p className="pb-4 pl-0 mt-4 text-xl font-bold text-gray-100">
 		Edges
@@ -151,6 +124,34 @@ const ModalContent = (props) => {
 		    </div>
 		)
 	    })}
+
+	    <div className="flex flex-row items-center mt-3">
+		<p className="mr-2 text-gray-100"> Group: </p>
+		<CodeMirror
+		    value={group}
+		    theme={'dark'}
+		    width={"10rem"}
+		    onChange={(e) => {
+			setGroup(e)
+		    }}
+		    extensions={[
+			markdown({ base: markdownLanguage, codeLanguages: languages })
+		    ]}
+
+		/>
+		<div className="items-center justify-center p-2 ml-4 text-sm font-bold text-center text-gray-300 align-middle rounded bg-slate-700 hover:bg-slate-600 transition"
+		    onClick={() => {
+			props.handleNodeUpdate(
+			    { 
+				id: name,
+				group: group,
+				content: ev,
+			    }
+			)
+		    }}>
+		    Push Changes
+		</div>
+	    </div>
 	</div>
     );
 }
