@@ -14,7 +14,7 @@ import { BsArrowReturnRight, BsArrowBarRight } from 'react-icons/bs';
 const NodeAdder = (props) => {
     const [name, setName] = useState("Vertex Name")
     const [group, setGroup] = useState("1")
-    const [content, setContent] = useState("# Title \n The content of the vertex!")
+    const [content, setContent] = useState("# Title \nThe content of the vertex!")
 
     return (
 	<div className="flex flex-col h-full overflow-auto border-0 border-red-400 space-y-4">
@@ -48,6 +48,18 @@ const NodeAdder = (props) => {
 		    onChange={(e) => { setContent(e) }} 
 		    extensions={[ markdown({ base: markdownLanguage, codeLanguages: languages }) ]}
 		/>
+	    <div className="flex items-center justify-center">
+		<div
+		    className="p-2 mb-2 text-gray-200 bg-indigo-900 rounded-lg pr-7 pl-7 hover:bg-indigo-800 transition-all"
+		    onClick={() => {
+			props.handleNodeAddition({
+			    id: name,
+			    group: group,
+			    content: content
+			})
+		    }}
+		>Save</div>
+	    </div>
 	</div>
     );
 }

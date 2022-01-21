@@ -52,8 +52,8 @@ const searchStyle = {
 };
 
 const addStyle = {
-    width: "25rem",
-    height: "25rem",
+    width: "30rem",
+    height: "30rem",
 
     position: "absolute",
     top: "50%",
@@ -147,6 +147,15 @@ const Graph = (props) => {
 	}, 250);
     }
 
+    const handleNodeAddition = (node) => {
+	setAdding(false)
+	console.log(node)
+	//handleClose()
+	//setTimeout(function(){
+	//    focusNode(getNodeFromName(name))
+	//}, 250);
+    }
+
     useEffect(() => {
 	document.addEventListener("keydown", handleKeyDown.bind(this))
     }, [])
@@ -169,8 +178,7 @@ const Graph = (props) => {
 		    console.log(e)
 		}}
 		//nodeColor={'#d65d0e'}
-		//nodeAutoColorBy={'red'}
-		//backgroundColor={'#303030'}
+		//nodeAutoColorBy={'red'} backgroundColor={'#303030'}
 		//backgroundColor={'#1d2021'}
 		//backgroundColor={'red'}
 		//nodeColor={'blue'}
@@ -232,7 +240,7 @@ const Graph = (props) => {
 		    <Fade in={adding}>
 			<Box sx={addStyle}>
 			    {/*<ModalContent node={curNode} />*/}
-			    <NodeAdder />
+			    <NodeAdder handleNodeAddition={handleNodeAddition}/>
 			</Box>
 		    </Fade>
 		</Modal>
