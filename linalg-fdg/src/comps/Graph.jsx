@@ -10,7 +10,8 @@ import { withShortcut, ShortcutProvider, ShortcutConsumer } from 'react-keybind'
 import ForceGraph3D from 'react-force-graph-3d';
 import ModalContent from './ModalContent';
 import Searcher from './Searcher';
-import data from '../data'
+//import data from '../data'
+import data, { addNode, updateNode, addEdge, updateEdge } from '../db';
 import { BsSearch } from 'react-icons/bs';
 
 const style = {
