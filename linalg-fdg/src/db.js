@@ -5,13 +5,11 @@ import update from "react-addons-update";
 import { supabase_url, supabase_pubkey } from './secrets';
 import data from './data';
 //data.nodes = data.nodes.map(v => ({ id: v.id, content: v.content, group: v.group }))
-//console.log(JSON.stringify(data))
-
-//setTimeout(() => console.log(data), 1000);
 
 const client = createClient(supabase_url, supabase_pubkey);
-data.nodes.forEach(n => addNode(n));
-data.links.forEach(n => addLink(n));
+//client.from('links').delete().match({}).then(console.log);    // VERY DANGEROUS
+//data.nodes.forEach(n => addNode(n));
+//data.links.forEach(n => addLink(n));
 
 /////////////////////////////////////////////////////
 // PUSH CHANGES TO DB
@@ -30,8 +28,6 @@ export async function addNode(obj) {
 }
 
 export async function updateNode(obj) {
-    console.log('updating node', obj)
-    // TODO: untested
     const { d, e } = await client
         .from('nodes')
         .update({
@@ -44,8 +40,8 @@ export async function updateNode(obj) {
 }
 
 export async function addLink(obj) {
-    console.log('addLink', obj)
-    // TODO: untested
+    if (typeof obj.source !== 'string') obj.source = obj.source.id;
+    if (typeof obj.target !== 'string') obj.target = obj.target.id;
     const { d, e } = await client.from('links').insert([
         {
             source: obj.source,
@@ -59,7 +55,8 @@ export async function addLink(obj) {
 }
 
 export async function updateLink(obj) {
-    // TODO: untested
+    if (typeof obj.source !== 'string') obj.source = obj.source.id;
+    if (typeof obj.target !== 'string') obj.target = obj.target.id;
     const { d, e } = await client
         .from('nodes')
         .update({
@@ -92,29 +89,21 @@ function useDatabase() {
         console.log('after reduce', state)
         return state;
     }
-    const [ data_state, dispatch ] = useReducer(reducer, { nodes: await client.from('nodes').select(), links: await client.from('links').select() });
+    const [ data_state, dispatch ] = useReducer(reducer, { nodes: [], links: [] });
 
     useEffect(() => {
-        // https://reactjs.org/docs/hooks-custom.html
-        //const subscriptions = client
-        //    .from('nodes').on('INSERT', handleNodeInsert)
-        //                  .on('UPDATE', handleNodeUpdate)
-        //    .from('edges').on('INSERT', handleEdgeInsert)
-        //                  .on('UPDATE', handleEdgeUpdate)
-        //    .subscribe();
-        //
         const subscriptions = client.from('*').on('*', dispatch).subscribe();
-
-        //const subscriptions = client
-        //    .from('nodes')
-        //    .on('*', (e) => {
-        //        console.log('aonetkoenuhxrygxbenhuxbrceidxnebuxrcdeuxrcd')
-        //        dispatch(e)
-        //    }).subscribe();
-        console.log('subscrobe')
-
         //return () => { client.removeSubscription(subscriptions); };
     });
+
+    useEffect(async () => {
+        const inserter = table => obj => { dispatch({ eventType: "INSERT", table, new: obj }) }
+        await client.from('nodes').select().then(t => t.body.forEach(inserter('nodes')));
+        //await client.from('links').select().then(t => t.body.forEach(console.log));
+        //await client.from('links').select().then(t => t.body.forEach(obj => inserter('links')({ ...obj, source: JSON.parse(obj.source).id, target: JSON.parse(obj.target).id })));
+        await client.from('links').select().then(t => t.body.forEach(inserter('links')));
+    }, []);
+    console.log('data state', data_state);
 
     return data_state;
 }

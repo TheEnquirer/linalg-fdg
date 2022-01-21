@@ -153,7 +153,7 @@ const Graph = (props) => {
 
     const handleNodeAddition = (node) => {
 	setAdding(false)
-	console.log(node)
+	//console.log(node)
 	addNode(node)
     }
 
