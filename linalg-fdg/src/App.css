@@ -11,6 +11,14 @@
     @apply p-2 rounded-lg text-slate-300 transition-all;
 }
 
+.addLink {
+    background: #313140;
+    transition: 0.3s;
+}
+
+.addLink:hover {
+    background: #434358;
+}
 /*.fab2 {*/
 /*    position: absolute;*/
 /*    top: 1rem;*/

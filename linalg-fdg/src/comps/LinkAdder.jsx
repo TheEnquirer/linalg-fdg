@@ -1,9 +1,10 @@
+
 import { useState, useRef, useCallback } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { languages } from '@codemirror/language-data';
 import '../App.css';
-//import data from '../data'
+import data from '../data'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -23,19 +24,9 @@ import { useTheme, styled } from '@mui/material/styles';
 
 const StyledPopper = styled(Popper)({
     [`& .${autocompleteClasses.listbox}`]: {
-	//border: '1px solid red',
 	backgroundColor: "#30303d",
-	//marginTop: "1rem",
 	paddingLeft: "1rem",
 	paddingTop: "1rem",
-	//borderRadius: "12px",
-	//border: "12px solid red",
-	//borderStyle: "outset",
-	//boxSizing: 'border-box',
-	'& ul': {
-	    //padding: 0,
-	    //margin: 0,
-	},
     },
 });
 
@@ -48,11 +39,9 @@ const useFocus = () => {
 
     return [ htmlElRef, setFocus ] 
 }
-const Searcher = (props) => {
-    const filterOptions = (options, { inputValue }) => matchSorter(options, inputValue);
+const LinkAdder = (props) => {
     const [inputRef, setInputFocus] = useFocus()
     const [inpVal, setInpVal] = useState(null)
-    //const [m, setM] = useState()
     let dataOptions = props.data.nodes.map((n) => { return { title: n.id, node: n } })
     //console.log(dataOptions.map(v => v.title))
 
@@ -62,12 +51,8 @@ const Searcher = (props) => {
 	    <Autocomplete
 		disablePortal
 		PopperComponent={StyledPopper}
-		//value={inpVal}
 		autoComplete={true}
 		autoHighlight={true}
-		//onInputChange={(event, newValue, reason) => {
-		//    setInpVal(newValue);
-		//}}
 		onKeyDown={(e) => {
 		    if (e.code == "Enter") {
 			setTimeout(function(){
@@ -150,4 +135,4 @@ const Searcher = (props) => {
     );
 }
 
-export default Searcher;
+export default LinkAdder;

@@ -225,7 +225,7 @@ const Graph = (props) => {
 		>
 		    <Fade in={open}>
 			<Box sx={style}>
-			    <ModalContent node={curNode} nav={handleLinkNav} handleNodeUpdate={handleNodeUpdate}/>
+			    <ModalContent node={curNode} nav={handleLinkNav} handleNodeUpdate={handleNodeUpdate} data={data}/>
 			</Box>
 		    </Fade>
 		</Modal>
@@ -243,8 +243,9 @@ const Graph = (props) => {
 		    <Fade in={searching}>
 			<Box sx={searchStyle}>
 			    {/*<ModalContent node={curNode} />*/}
-			    <Searcher 
+			    <Searcher
 				handleSearchSubmit={handleSearchSubmit}
+				data={data}
 			    />
 			</Box>
 		    </Fade>

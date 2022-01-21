@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
+import Backdrop from '@mui/material/Backdrop';
 import CodeMirror from '@uiw/react-codemirror';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { languages } from '@codemirror/language-data';
@@ -12,7 +13,34 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { BiExpandAlt } from 'react-icons/bi';
 import { BsArrowReturnRight, BsArrowBarRight } from 'react-icons/bs';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Box from '@mui/material/Box';
+import LinkAdder from './LinkAdder';
 //import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
+
+
+
+const addStyle = {
+    width: "30rem",
+    height: "30rem",
+
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+
+    bgcolor: 'background.paper',
+    border: '0px solid #000',
+    borderRadius: "8px",
+    outline: "none",
+    backgroundColor: "#202024",
+    //boxShadow: 24,
+    p: 4,
+};
+
 
 const ModalContent = (props) => {
     //console.log(Object.keys(props.node), props.node, "the content??")
@@ -20,13 +48,18 @@ const ModalContent = (props) => {
     const [ev, setEv] = useState(props.node.content)
     const [name, setName] = useState(props.node.id)
     const [group, setGroup] = useState(String(props.node.group))
+    const [addingLink, setAddingLink] = useState(false)
+
+    const handleEndAddingLink = () => {
+	setAddingLink(false)
+    }
+
     const getLinks = () => {
-	let links = data['links'].filter((v) =>
+	let links = props.data['links'].filter((v) =>
 	    {
 		if (v.source.id == props.node.id || v.target.id == props.node.id) {
 		    return v
-		}
-	    }
+		} }
 	)
 	return links
     }
@@ -124,6 +157,26 @@ const ModalContent = (props) => {
 		    </div>
 		)
 	    })}
+	    <div style={{
+		height: "3rem",
+		justifyContent: "center",
+		alignItems: "center",
+		textAlign: "center",
+		display: "flex",
+		borderRadius: "3px",
+		padding: "1rem",
+		//paddingBottom: "3rem",
+		//color: "#f9f9f9",
+		color: "#d7d7ee",
+		fontWeight: "700",
+	    }}
+		className="mb-4 addLink"
+		onClick={() => {
+		    setAddingLink(true)
+		}}
+	    >
+		Add a link
+	    </div>
 
 	    <div className="flex flex-row items-center mt-3">
 		<p className="mr-2 text-gray-100"> Group: </p>
@@ -152,6 +205,28 @@ const ModalContent = (props) => {
 		    Push Changes
 		</div>
 	    </div>
+
+	    <Modal
+		aria-labelledby="transition-modal-title"
+		aria-describedby="transition-modal-description"
+		open={addingLink}
+		onClose={handleEndAddingLink}
+		closeAfterTransition
+		BackdropComponent={Backdrop}
+		BackdropProps={{
+		    timeout: 200,
+		}}
+	    >
+		<Fade in={addingLink}>
+		    <Box sx={addStyle}>
+			{/*<ModalContent node={curNode} />*/}
+			{/*<NodeAdder handleNodeAddition={handleNodeAddition}/>*/}
+			<LinkAdder data={props.data}/>
+
+		    </Box>
+		</Fade>
+	    </Modal>
+
 	</div>
     );
 }
