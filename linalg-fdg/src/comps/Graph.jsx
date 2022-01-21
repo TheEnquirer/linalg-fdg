@@ -12,6 +12,8 @@ import ModalContent from './ModalContent';
 import Searcher from './Searcher';
 //import data from '../data'
 import useData, { addNode, updateNode, addEdge, updateEdge } from '../db';
+//import data from '../data'
+//import data, { addNode, updateNode, addEdge, updateEdge } from '../db';
 import { BsSearch } from 'react-icons/bs';
 
 const style = {
@@ -47,6 +49,23 @@ const searchStyle = {
     //p: 4,
 };
 
+const addStyle = {
+    width: "25rem",
+    height: "25rem",
+
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+
+    bgcolor: 'background.paper',
+    border: '0px solid #000',
+    borderRadius: "8px",
+    outline: "none",
+    backgroundColor: "#202024",
+    //boxShadow: 24,
+    p: 4,
+};
 
 
 const Graph = (props) => {
@@ -54,6 +73,7 @@ const Graph = (props) => {
     const [searching, setSearching] = useState(false);
     const [curNode, setCurNode] = useState(null);
     const data = useData();
+    const [adding, setAdding] = useState(false);
     const handleOpen = (e) => {
 	//console.log(e)
 	setCurNode(e)
@@ -63,6 +83,8 @@ const Graph = (props) => {
 
     const handleSearchStart = (e) => { setSearching(true) }
     const handleSearchEnd = (e) => { setSearching(false) }
+
+    const handleAddEnd = (e) => { setAdding(false) }
 
     const fgRef = useRef();
 
@@ -93,11 +115,19 @@ const Graph = (props) => {
 	//handleSearchStart()
     }, [fgRef]);
 
+    const launchAddNode = () => {
+	setAdding(true)
+    }
+
     const handleKeyDown = (e) => {
+	if (e.ctrlKey && e.which == 69) {
+	    launchAddNode();
+	}
 	if (e.ctrlKey && e.which === 75) {
 	    setSearching(true)
 	}
     }
+
 
     const handleSearchSubmit = (name) => {
 	handleClose()
@@ -183,6 +213,24 @@ const Graph = (props) => {
 			    <Searcher 
 				handleSearchSubmit={handleSearchSubmit}
 			    />
+			</Box>
+		    </Fade>
+		</Modal>
+		<Modal
+		    aria-labelledby="transition-modal-title"
+		    aria-describedby="transition-modal-description"
+		    open={adding}
+		    onClose={handleAddEnd}
+		    closeAfterTransition
+		    BackdropComponent={Backdrop}
+		    BackdropProps={{
+			timeout: 200,
+		    }}
+		>
+		    <Fade in={adding}>
+			<Box sx={addStyle}>
+			    {/*<ModalContent node={curNode} />*/}
+			    <NodeAdder />
 			</Box>
 		    </Fade>
 		</Modal>
