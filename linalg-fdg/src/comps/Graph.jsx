@@ -157,6 +157,10 @@ const Graph = (props) => {
 	addNode(node)
     }
 
+    const handleNodeUpdate = (node) => {
+	console.log(node)
+    }
+
     useEffect(() => {
 	document.addEventListener("keydown", handleKeyDown.bind(this))
     }, [])
@@ -221,7 +225,7 @@ const Graph = (props) => {
 		>
 		    <Fade in={open}>
 			<Box sx={style}>
-			    <ModalContent node={curNode} nav={handleLinkNav}/>
+			    <ModalContent node={curNode} nav={handleLinkNav} handleNodeUpdate={handleNodeUpdate}/>
 			</Box>
 		    </Fade>
 		</Modal>
