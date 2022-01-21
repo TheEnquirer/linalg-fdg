@@ -11,6 +11,7 @@ import ForceGraph3D from 'react-force-graph-3d';
 import ModalContent from './ModalContent';
 import Searcher from './Searcher';
 import data from '../data'
+import { BsSearch } from 'react-icons/bs';
 
 const style = {
     position: 'absolute',
@@ -134,6 +135,11 @@ const Graph = (props) => {
 		//nodeColor={'blue'}
 	    />
 	    <div>
+		<div className="flex flex-row items-center justify-center fab" 
+		    onClick={() => setSearching(true)}
+		> 
+		    <BsSearch className="mr-2"/> <span className="rounded-sm bg-zinc-700" style={{paddingLeft: "2px", paddingRight: "2px"}}>{"<C-k>"}</span>
+		</div>
 		<Modal
 		    aria-labelledby="transition-modal-title"
 		    aria-describedby="transition-modal-description"
