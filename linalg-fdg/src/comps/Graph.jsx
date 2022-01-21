@@ -226,7 +226,11 @@ const Graph = (props) => {
 		>
 		    <Fade in={open}>
 			<Box sx={style}>
-			    <ModalContent node={curNode} nav={handleLinkNav} handleNodeUpdate={handleNodeUpdate} data={data}/>
+			    <ModalContent node={curNode} nav={handleLinkNav} handleNodeUpdate={handleNodeUpdate} data={data}
+				handleLinkSubmit={(v) => {
+				    addEdge(v)
+				}}
+			    />
 			</Box>
 		    </Fade>
 		</Modal>

@@ -25,7 +25,7 @@ import LinkAdder from './LinkAdder';
 
 const addStyle = {
     width: "30rem",
-    height: "30rem",
+    height: "25rem",
 
     position: "absolute",
     top: "50%",
@@ -175,7 +175,7 @@ const ModalContent = (props) => {
 		    setAddingLink(true)
 		}}
 	    >
-		Add a link
+		Add a edge
 	    </div>
 
 	    <div className="flex flex-row items-center mt-3">
@@ -219,7 +219,13 @@ const ModalContent = (props) => {
 	    >
 		<Fade in={addingLink}>
 		    <Box sx={addStyle}>
-			<LinkAdder data={props.data}/>
+			<LinkAdder
+			    data={props.data}
+			    handleLinkSubmit={(v) => {
+				props.handleLinkSubmit(v)
+			    }}
+			    source={props.node}
+			/>
 		    </Box>
 		</Fade>
 	    </Modal>
