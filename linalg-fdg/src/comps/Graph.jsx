@@ -17,6 +17,7 @@ import useData, { addNode, updateNode, addEdge, updateEdge } from '../db';
 //import data from '../data'
 //import data, { addNode, updateNode, addEdge, updateEdge } from '../db';
 import { BsSearch } from 'react-icons/bs';
+import { IoIosAdd as IoAdd } from 'react-icons/io';
 
 const style = {
     position: 'absolute',
@@ -184,15 +185,28 @@ const Graph = (props) => {
 		//nodeColor={'blue'}
 	    />
 	    <div>
-		<div className="flex flex-row items-center justify-center fab" 
-		    onClick={() => setSearching(true)}
-		> 
-		    <BsSearch className="mr-2"/> <span className="rounded-sm bg-zinc-700" style={{paddingLeft: "2px", paddingRight: "2px"}}>{"<C-e>"}</span>
-		</div>
-		<div className="flex flex-row items-center justify-center mr-12 fab2" 
-		    onClick={() => setAdding(true)}
-		> 
-		    <BsSearch className="mr-2"/> <span className="rounded-sm bg-zinc-700" style={{paddingLeft: "2px", paddingRight: "2px"}}>{"<C-k>"}</span>
+		<div className="flex flex-row fab space-x-5">
+		    <div 
+			className="flex flex-row items-center justify-center" 
+			onClick={() => setSearching(true)}
+		    > 
+			<BsSearch className="mr-1"/>
+			<span className="rounded-sm bg-zinc-700" style={{paddingLeft: "2px", paddingRight: "2px"}}>
+			    {"<C-k>"}
+			</span>
+		    </div>
+		    <div 
+			className="flex flex-row items-center justify-center" 
+			onClick={() => setAdding(true)}
+		    > 
+			<IoAdd className="mr-1" style={{
+			    fontSize: "13px",
+			}}/>
+			<span className="rounded-sm bg-zinc-700" style={{paddingLeft: "2px", paddingRight: "2px"}}>
+			    {"<C-e>"}
+			</span>
+		    </div>
+
 		</div>
 		<Modal
 		    aria-labelledby="transition-modal-title"
