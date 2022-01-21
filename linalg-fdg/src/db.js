@@ -64,11 +64,12 @@ function useDatabase() {
         //    .subscribe();
         //const subscriptions = client.from('*').on('*', dispatch).subscribe();
         const subscriptions = client
-            .from('*')
+            .from('nodes')
             .on('*', (e) => {
-                console.log('update');
+                console.log('aonetkoenuhxrygxbenhuxbrceidxnebuxrcdeuxrcd')
                 dispatch(e)
             }).subscribe();
+        console.log('subscrobe')
 
         return () => { client.removeSubscription(subscriptions); };
     });
