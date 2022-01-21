@@ -34,7 +34,7 @@ const ModalContent = (props) => {
     return (
 	<div className="h-full overflow-auto border-0 border-red-400">
 	    <div className="">
-		    <p className="pb-4 pl-0 text-xl font-bold text-gray-100">
+		    <div className="pb-4 pl-0 text-xl font-bold text-gray-100">
 		<div className="flex flex-row">
 			<div className="flex flex-row items-center">
 			    <p className="mr-4" >Vertex </p>
@@ -52,7 +52,7 @@ const ModalContent = (props) => {
 			    /> 
 			</div>
 		</div>
-		    </p>
+		    </div>
 		{/*<hr />
 		<br />*/}
 		<CodeMirror
