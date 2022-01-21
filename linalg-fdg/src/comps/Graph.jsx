@@ -86,7 +86,10 @@ const Graph = (props) => {
     const handleSearchStart = (e) => { setSearching(true) }
     const handleSearchEnd = (e) => { setSearching(false) }
 
-    const handleAddEnd = (e) => { setAdding(false) }
+    const handleAddEnd = (node) => { 
+	//console.log(node)
+	setAdding(false) 
+    }
 
     const fgRef = useRef();
 
@@ -150,10 +153,7 @@ const Graph = (props) => {
     const handleNodeAddition = (node) => {
 	setAdding(false)
 	console.log(node)
-	//handleClose()
-	//setTimeout(function(){
-	//    focusNode(getNodeFromName(name))
-	//}, 250);
+	addNode(node)
     }
 
     useEffect(() => {
