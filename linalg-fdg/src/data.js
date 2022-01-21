@@ -275,6 +275,37 @@ let data = {
 "content":  "# Spanning list contains a basis \nEvery spanning list in a vector space can be reduced to a basis of the vector space."
 	},
 
+{
+"id": "Basis of finite-dimensional vector space",
+"group": 3,
+"content":  "# Basis of finite-dimensional vector space \nEvery finite-dimensional vector space has a basis."
+	},
+
+{
+"id": "Linearly Independent list extends to a basis",
+"group": 3,
+"content":  "# Linearly Independent list extends to a basis \nEvery linearly independent list of vectors in a finite-dimensional vector space can be extended to a basis of the vector space."
+	},
+
+{
+"id": "Every subspace of V is part of a direct sum equal to V",
+"group": 3,
+"content":  "# Every subspace of V is part of a direct sum equal to V \nSuppose V is finite-dimensional and U is a subspace of V. Then there is a subspace W of V such that V = U direct sum W."
+	},
+
+{
+"id": "Basis length does not depend on basis",
+"group": 3,
+"content":  "# Basis length does not depend on basis \nAny two bases of a finite-dimensional vector space have the same length."
+	},
+
+
+
+
+
+
+
+
 
 
 
@@ -1081,8 +1112,166 @@ let data = {
 "Content":  "This concept relies on vector spaces."
 	},
 
+{
+"source": "Proof by Contrapositive",
+"target": "Span is the smallest containing subspace",
+"value": 1,
+"Content":  "Span is the smallest containing subspace relies on the contrapositive."
+	},
+
+{
+"source": "Length of Linearly Independent list ≤ length of spanning list",
+"target": "Spanning list contains a basis",
+"value": 1,
+"Content":  "The spanning list containing a basis follows from the length of the linearly independent list being ≤ the length of the spanning list."
+	},
+
+{
+"source": "Basis of finite-dimensional vector space",
+"target": "Spanning list contains a basis",
+"value": 1,
+"Content":  "All finite-dimensioal vector spaces having bases follows from the spanning list containing a basis."
+	},
+
+{
+"source": "Basis of finite-dimensional vector space",
+"target": "Dimension",
+"value": 1,
+"Content":  "This theorem relies on the concept of dimension."
+	},
+
+{
+"source": "Basis of finite-dimensional vector space",
+"target": "Bases",
+"value": 1,
+"Content":  "This theorem relies on the concept of bases."
+	},
+
+{
+"source": "Basis of finite-dimensional vector space",
+"target": "Length of Linearly Independent list ≤ length of spanning list",
+"value": 1,
+"Content":  "All finite-dimensional vector spaces having bases follows from the length of the linearly independent list being ≤ the length of the spanning list."
+	},
+
+{
+"source": "Basis of finite-dimensional vector space",
+"target": "Span",
+"value": 1,
+"Content":  "This theorem relies on the concept of span."
+	},
+
+{
+"source": "Basis of finite-dimensional vector space",
+"target": "Vector Space",
+"value": 1,
+"Content":  "This theorem relies on the concept of vector spaces."
+	},
+
+{
+"source": "Linearly Independent list extends to a basis",
+"target": "Vector Space",
+"value": 1,
+"Content":  "This theorem relies on the concept of vector spaces."
+	},
+
+{
+"source": "Linearly Independent list extends to a basis",
+"target": "Bases",
+"value": 1,
+"Content":  "This theorem relies on the concept of bases."
+	},
+
+{
+"source": "Linearly Independent list extends to a basis",
+"target": "Linear Dependence Lemma",
+"value": 1,
+"Content":  "This theorem relies on the linear dependence lemma."
+	},
+
+{
+"source": "Linearly Independent list extends to a basis",
+"target": "Direct Proofs",
+"value": 1,
+"Content":  "This theorem is proven through a direct proof."
+	},
+
+{
+"source": "Linearly Independent list extends to a basis",
+"target": "Dimension",
+"value": 1,
+"Content":  "This theorem relies on finite-dimensional vector spaces."
+	},
+
+{
+"source": "Every subspace of V is part of a direct sum equal to V",
+"target": "Direct Sums",
+"value": 1,
+"Content":  "This theorem relies on direct sums."
+	},
+
+{
+"source": "Every subspace of V is part of a direct sum equal to V",
+"target": "Vector Space",
+"value": 1,
+"Content":  "This theorem relies on vector spaces."
+	},
+
+{
+"source": "Every subspace of V is part of a direct sum equal to V",
+"target": "Subspaces",
+"value": 1,
+"Content":  "This theorem relies on subspaces."
+	},
+
+{
+"source": "Every subspace of V is part of a direct sum equal to V",
+"target": "Linear Independence",
+"value": 1,
+"Content":  "This theorem relies on the concept of linear independence in its proof."
+	},
+
+{
+"source": "Every subspace of V is part of a direct sum equal to V",
+"target": "Direct Proofs",
+"value": 1,
+"Content":  "This theorem is proven through a direct proof."
+	},
+
+{
+"source": "Basis length does not depend on basis",
+"target": "Bases",
+"value": 1,
+"Content":  "This theorem relies on the concept of bases."
+	},
+
+{
+"source": "Basis length does not depend on basis",
+"target": "Dimension",
+"value": 1,
+"Content":  "This theorem relies on finite-dimensional vector spaces."
+	},
+
+{
+"source": "Basis length does not depend on basis",
+"target": "Vector Space",
+"value": 1,
+"Content":  "This theorem relies on vector spaces."
+	},
+
+{
+"source": "Basis length does not depend on basis",
+"target": "Direct Proofs",
+"value": 1,
+"Content":  "This theorem is proven through a direct proof."
+	},
+
+
+
     ]
 }
+
+
 
 
 

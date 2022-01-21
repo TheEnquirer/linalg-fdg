@@ -8,6 +8,7 @@ import data from './data';
 
 const client = createClient(supabase_url, supabase_pubkey);
 //client.from('links').delete().match({}).then(console.log);    // VERY DANGEROUS
+//client.from('nodes').delete().match({}).then(console.log);    // VERY DANGEROUS
 //data.nodes.forEach(n => addNode(n));
 //data.links.forEach(n => addLink(n));
 
@@ -90,6 +91,7 @@ function useDatabase() {
         return state;
     }
     const [ data_state, dispatch ] = useReducer(reducer, { nodes: [], links: [] });
+    //const [ data_state, dispatch ] = useReducer(reducer, data);
 
     useEffect(() => {
         const subscriptions = client.from('*').on('*', dispatch).subscribe();
