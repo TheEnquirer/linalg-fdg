@@ -53,9 +53,9 @@ const ModalContent = (props) => {
 	    <p className="pb-4 pl-0 mt-4 text-xl font-bold text-gray-100">
 		Edges
 	    </p>
-	    {getLinks().map((i) => {
+	    {getLinks().map((i, idx) => {
 		return (
-		    <div className="mb-3">
+		    <div className="mb-3" key={idx}>
 			<Accordion sx={{
 			    //border: "1px solid red",
 			    background: "#313140",
