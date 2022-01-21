@@ -11,6 +11,15 @@ const client = createClient(supabase_url, supabase_pubkey);
 /////////////////////////////////////////////////////
 
 export async function addNode(obj) {
+    const { d, e } = await client.from('nodes').insert([
+        {
+            id: obj.id,
+            group: obj.group,
+            content: obj.content,
+        }
+    ]);
+    if (e) throw e;
+    return d;
     // TODO: impl
 }
 
