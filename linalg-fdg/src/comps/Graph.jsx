@@ -11,7 +11,7 @@ import ForceGraph3D from 'react-force-graph-3d';
 import ModalContent from './ModalContent';
 import Searcher from './Searcher';
 //import data from '../data'
-import data, { addNode, updateNode, addEdge, updateEdge } from '../db';
+import useData, { addNode, updateNode, addEdge, updateEdge } from '../db';
 import { BsSearch } from 'react-icons/bs';
 
 const style = {
@@ -53,6 +53,7 @@ const Graph = (props) => {
     const [open, setOpen] = useState(false);
     const [searching, setSearching] = useState(false);
     const [curNode, setCurNode] = useState(null);
+    const data = useData();
     const handleOpen = (e) => {
 	//console.log(e)
 	setCurNode(e)
