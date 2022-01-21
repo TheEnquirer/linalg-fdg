@@ -106,6 +106,13 @@ const Graph = (props) => {
 	}, 187);
     }
 
+    const handleLinkNav = (name) => {
+	handleClose()
+	setTimeout(function(){
+	    focusNode(getNodeFromName(name))
+	}, 250);
+    }
+
     useEffect(() => {
 	document.addEventListener("keydown", handleKeyDown.bind(this))
     }, [])
@@ -153,7 +160,7 @@ const Graph = (props) => {
 		>
 		    <Fade in={open}>
 			<Box sx={style}>
-			    <ModalContent node={curNode} />
+			    <ModalContent node={curNode} nav={handleLinkNav}/>
 			</Box>
 		    </Fade>
 		</Modal>

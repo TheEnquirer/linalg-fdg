@@ -33,7 +33,7 @@ const ModalContent = (props) => {
     return (
 	<div className="h-full overflow-auto border-0 border-red-400">
 	    <div className="">
-		<p className="text-gray-100 pb-4 pl-0 font-bold text-xl">
+		<p className="pb-4 pl-0 text-xl font-bold text-gray-100">
 		Vertex
 		</p>
 		{/*<hr />
@@ -50,7 +50,7 @@ const ModalContent = (props) => {
 
 		/>
 	    </div>
-	    <p className="text-gray-100 pb-4 pl-0 font-bold text-xl mt-4">
+	    <p className="pb-4 pl-0 mt-4 text-xl font-bold text-gray-100">
 		Edges
 	    </p>
 	    {getLinks().map((i) => {
@@ -74,13 +74,21 @@ const ModalContent = (props) => {
 			    >
 				<div className="flex flex-row">
 				    <BsArrowReturnRight className="mt-1 mr-1"/>
-				    {i.source.id}
-				    <BsArrowBarRight className="mr-5 ml-5 mt-0 text-2xl"/>
-				    {i.target.id}
+				    <p className="pl-1 pr-1 rounded-sm hover:bg-gray-700 transition-all"
+					onClick={() => {
+					    props.nav(i.source.id)
+					}}
+				    >{i.source.id}</p>
+				    <BsArrowBarRight className="mt-0 ml-4 mr-5 text-2xl"/>
+				    <p className="pl-1 pr-1 rounded-sm hover:bg-gray-700 transition-all"
+					onClick={() => {
+					    props.nav(i.target.id)
+					}}
+				    >{i.target.id}</p>
 				</div>
 			    </AccordionSummary>
 			    <AccordionDetails>
-				<div className="font-normal -mt-4">
+				<div className="-mt-4 font-normal">
 				    <CodeMirror
 					value={i.Content}
 					theme={'dark'}
