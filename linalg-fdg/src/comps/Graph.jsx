@@ -187,6 +187,11 @@ const Graph = (props) => {
 		<div className="flex flex-row items-center justify-center fab" 
 		    onClick={() => setSearching(true)}
 		> 
+		    <BsSearch className="mr-2"/> <span className="rounded-sm bg-zinc-700" style={{paddingLeft: "2px", paddingRight: "2px"}}>{"<C-e>"}</span>
+		</div>
+		<div className="flex flex-row items-center justify-center mr-12 fab2" 
+		    onClick={() => setAdding(true)}
+		> 
 		    <BsSearch className="mr-2"/> <span className="rounded-sm bg-zinc-700" style={{paddingLeft: "2px", paddingRight: "2px"}}>{"<C-k>"}</span>
 		</div>
 		<Modal

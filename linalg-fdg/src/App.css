@@ -11,6 +11,14 @@
     @apply p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all;
 }
 
+.fab2 {
+    position: absolute;
+    top: 1rem;
+    left: 12rem;
+    font-size: 8px;
+    @apply p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all;
+}
+
 /***************************************************/
 /***************************************************/
 /***************************************************/
