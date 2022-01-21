@@ -92,7 +92,7 @@ function useDatabase() {
         console.log('after reduce', state)
         return state;
     }
-    const [ data_state, dispatch ] = useReducer(reducer, data);
+    const [ data_state, dispatch ] = useReducer(reducer, { nodes: await client.from('nodes').select(), links: await client.from('links').select() });
 
     useEffect(() => {
         // https://reactjs.org/docs/hooks-custom.html
