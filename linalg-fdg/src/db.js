@@ -1,10 +1,12 @@
 import { useReducer, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import update from "react-addons-update";
 
 import data from './data';
 import { supabase_url, supabase_pubkey } from './secrets';
 
 const client = createClient(supabase_url, supabase_pubkey);
+data.nodes.forEach(n => addNode(n));
 
 /////////////////////////////////////////////////////
 // PUSH CHANGES TO DB
@@ -22,8 +24,16 @@ export async function addNode(obj) {
     return d;
 }
 
-export async function updateNode(delta) {
-    // TODO: impl
+export async function updateNode(obj) {
+    const { d, e } = await client
+        .from('nodes')
+        .update({
+            group: obj.group,
+            content: obj.content,
+        })
+        .match({ id: obj.id })
+    if (e) throw e;
+    return d;
 }
 
 export async function addEdge(obj) {
@@ -50,7 +60,19 @@ export async function updateEdge(delta) {
 
 function useDatabase() {
     function reducer(state, action) {
-        console.log('reducer', state, action);
+        console.log('reduce', state, action);
+        switch (action.eventType) {
+            case "INSERT": return update(state, { [action.table]: { $push: [action.new] } });
+            case "UPDATE":
+                switch (action.table) {
+                    case "nodes": return { nodes: state.nodes.map(v => v.id == action.old.id ? action.new : v) };
+                    case "edges": return { edges: state.edges.map(v =>
+                        v.source == action.old.source && v.target == action.old.target ?
+                        action.new : v
+                    ) };
+                }
+        }
+        return state;
     }
     const [ data_state, dispatch ] = useReducer(reducer, data);
 
