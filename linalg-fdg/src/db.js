@@ -20,7 +20,6 @@ export async function addNode(obj) {
     ]);
     if (e) throw e;
     return d;
-    // TODO: impl
 }
 
 export async function updateNode(delta) {
@@ -28,7 +27,17 @@ export async function updateNode(delta) {
 }
 
 export async function addEdge(obj) {
-    // TODO: impl
+    // TODO: untested
+    const { d, e } = await client.from('edges').insert([
+        {
+            source: obj.source,
+            target: obj.target,
+            value: obj.value,
+            Content: obj.Content,
+        }
+    ]);
+    if (e) throw e;
+    return d;
 }
 
 export async function updateEdge(delta) {
@@ -53,7 +62,13 @@ function useDatabase() {
         //    .from('edges').on('INSERT', handleEdgeInsert)
         //                  .on('UPDATE', handleEdgeUpdate)
         //    .subscribe();
-        const subscriptions = client.from('*').on('*', dispatch).subscribe();
+        //const subscriptions = client.from('*').on('*', dispatch).subscribe();
+        const subscriptions = client
+            .from('*')
+            .on('*', (e) => {
+                console.log('update');
+                dispatch(e)
+            }).subscribe();
 
         return () => { client.removeSubscription(subscriptions); };
     });
