@@ -126,10 +126,11 @@ const Graph = (props) => {
     }
 
     const handleKeyDown = (e) => {
+	console.log(e)
 	if (e.ctrlKey && e.which == 69) {
 	    launchAddNode();
 	}
-	if (e.ctrlKey && e.which === 75) {
+	if ((e.ctrlKey && e.which === 75) || (e.metaKey && e.which == 75)) {
 	    setSearching(true)
 	}
     }
