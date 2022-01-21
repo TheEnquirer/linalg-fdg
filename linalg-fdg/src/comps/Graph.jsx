@@ -13,7 +13,7 @@ import Searcher from './Searcher';
 import NodeAdder from './NodeAdder';
 
 //import data from '../data'
-import useData, { addNode, updateNode, addEdge, updateEdge } from '../db';
+import useData, { addNode, updateNode, addLink, updateLink } from '../db';
 //import data from '../data'
 //import data, { addNode, updateNode, addEdge, updateEdge } from '../db';
 import { BsSearch } from 'react-icons/bs';
@@ -228,7 +228,7 @@ const Graph = (props) => {
 			<Box sx={style}>
 			    <ModalContent node={curNode} nav={handleLinkNav} handleNodeUpdate={handleNodeUpdate} data={data}
 				handleLinkSubmit={(v) => {
-				    addEdge(v)
+				    addLink(v)
 				}}
 			    />
 			</Box>

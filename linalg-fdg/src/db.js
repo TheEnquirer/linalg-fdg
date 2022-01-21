@@ -11,6 +11,7 @@ import data from './data';
 
 const client = createClient(supabase_url, supabase_pubkey);
 data.nodes.forEach(n => addNode(n));
+data.links.forEach(n => addLink(n));
 
 /////////////////////////////////////////////////////
 // PUSH CHANGES TO DB
@@ -42,9 +43,10 @@ export async function updateNode(obj) {
     return d;
 }
 
-export async function addEdge(obj) {
+export async function addLink(obj) {
+    console.log('addLink', obj)
     // TODO: untested
-    const { d, e } = await client.from('edges').insert([
+    const { d, e } = await client.from('links').insert([
         {
             source: obj.source,
             target: obj.target,
@@ -56,7 +58,7 @@ export async function addEdge(obj) {
     return d;
 }
 
-export async function updateEdge(obj) {
+export async function updateLink(obj) {
     // TODO: untested
     const { d, e } = await client
         .from('nodes')
@@ -81,7 +83,7 @@ function useDatabase() {
             case "UPDATE":
                 switch (action.table) {
                     case "nodes": console.log('update nodes, returning', state.nodes.map(v => v.id == action.old.id ? action.new : v)); return { nodes: state.nodes.map(v => v.id == action.old.id ? action.new : v) };
-                    case "edges": return { links: state.links.map(v =>
+                    case "links": return { links: state.links.map(v =>
                         (v.source == action.old.source && v.target == action.old.target) ?
                         action.new : v
                     ) };
