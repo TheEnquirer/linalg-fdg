@@ -71,7 +71,7 @@ function useDatabase() {
             }).subscribe();
         console.log('subscrobe')
 
-        return () => { client.removeSubscription(subscriptions); };
+        //return () => { client.removeSubscription(subscriptions); };
     });
 
     return data_state;
