@@ -25,6 +25,7 @@ export async function addNode(obj) {
 }
 
 export async function updateNode(obj) {
+    // TODO: untested
     const { d, e } = await client
         .from('nodes')
         .update({
@@ -50,8 +51,17 @@ export async function addEdge(obj) {
     return d;
 }
 
-export async function updateEdge(delta) {
-    // TODO: impl
+export async function updateEdge(obj) {
+    // TODO: untested
+    const { d, e } = await client
+        .from('nodes')
+        .update({
+            value: obj.value,
+            Content: obj.Content,
+        })
+        .match({ source: obj.source, target: obj.target })
+    if (e) throw e;
+    return d;
 }
 
 /////////////////////////////////////////////////////
