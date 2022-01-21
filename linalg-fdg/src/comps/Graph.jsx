@@ -10,6 +10,8 @@ import { withShortcut, ShortcutProvider, ShortcutConsumer } from 'react-keybind'
 import ForceGraph3D from 'react-force-graph-3d';
 import ModalContent from './ModalContent';
 import Searcher from './Searcher';
+import NodeAdder from './NodeAdder';
+
 //import data from '../data'
 import useData, { addNode, updateNode, addEdge, updateEdge } from '../db';
 //import data from '../data'
