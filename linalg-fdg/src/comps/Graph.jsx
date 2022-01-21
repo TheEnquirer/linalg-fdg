@@ -8,36 +8,47 @@ import '../App.css';
 import { useState, useRef, useCallback } from 'react';
 import ForceGraph3D from 'react-force-graph-3d';
 import ModalContent from './ModalContent';
+import Searcher from './Searcher';
 import data from '../data'
 
 const style = {
     position: 'absolute',
-    //top: '50%',
-    //left: '88%',
     top: '3rem',
     right: "3rem",
     bottom: '3rem',
     minWidth: "40%",
     width: "40%",
-    //transform: 'translate(-50%, -50%)',
-    //width: '20%',
-    //height: '95%',
-    //height: '80%',
+    bgcolor: 'background.paper',
+    border: '0px solid #000',
+    borderRadius: "8px",
+    outline: "none",
+    backgroundColor: "#202024",
+    //p: 4,
+};
+
+const searchStyle = {
+    position: 'absolute',
+    top: '4rem',
+    width: "35rem",
+    height: "6rem",
+    left: "0",
+    right: "0",
+    margin: "auto",
+
     bgcolor: 'background.paper',
     border: '0px solid #000',
     borderRadius: "8px",
     outline: "none",
     backgroundColor: "#202024",
     //boxShadow: 24,
-    p: 4,
+    //p: 4,
 };
-
-//const data = { "nodes": [ { "id": "Linear Independence", "group": 1, "content":  "# Linear Independence \n A list of vectors is linearly independent if the only way to create a linear combination equal to zero is to set all constants multiplying the vectors to zero." }, { "id": "Linear Dependence", "group": 1, "content":  "# Linear Dependence \n A list of vectors is linearly dependent if there is a linear combination with not all coefficients equal to 0 that can result in a combination equal to 0." }, ], "links": [ { "source": "Linear Independence", "target": "Linear Dependence", "value": 1, "Content":  "Linear Independence and Linear Dependence are opposite terms dealing with the same concept of unique information. A Linearly Independent list contains vectors that each provide some form of new information, whereas in a Linearly Dependent list there are vectors that provide only repetitive information: they are in the span of the other vectors." }, ] }
 
 
 
 const Graph = (props) => {
     const [open, setOpen] = useState(false);
+    const [searching, setSearching] = useState(false);
     const [curNode, setCurNode] = useState(null);
     const handleOpen = (e) => {
 	//console.log(e)
@@ -46,11 +57,13 @@ const Graph = (props) => {
     }
     const handleClose = (e) => { setOpen(false) }
 
+    const handleSearchStart = (e) => { setSearching(true) }
+    const handleSearchEnd = (e) => { setSearching(false) }
+
     const fgRef = useRef();
 
     const getNodeFromName = (name) => {
 	let nodes = fgRef.current.scene().children[3].children
-	//console.log(nodes)
 	for (const node of nodes) {
 	    if (node.__graphObjType == 'node') {
 		if (node.__data.id == name) {
@@ -72,25 +85,8 @@ const Graph = (props) => {
     }, [fgRef]);
 
     const handleClick = useCallback(node => {
-	focusNode(node)
-	//console.log(node)
-	//focusNode(getNodeFromName("Vectors"))
-
-	//let links = data['links'].filter((v) =>
-	//    {
-	//        if (v.source.id == node.id || v.target.id == node.id) {
-	//            return v
-	//        }
-	//    }
-	//)
-	//handleOpen(node);
-	//const distance = 40;
-	//const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
-	//fgRef.current.cameraPosition(
-	//    { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
-	//    node, // lookAt ({ x, y, z })
-	//    1000  // ms transition duration
-	//);
+	//focusNode(node)
+	handleSearchStart()
     }, [fgRef]);
 
     return (
@@ -132,6 +128,24 @@ const Graph = (props) => {
 		    <Fade in={open}>
 			<Box sx={style}>
 			    <ModalContent node={curNode} />
+			</Box>
+		    </Fade>
+		</Modal>
+		<Modal
+		    aria-labelledby="transition-modal-title"
+		    aria-describedby="transition-modal-description"
+		    open={searching}
+		    onClose={handleSearchEnd}
+		    closeAfterTransition
+		    BackdropComponent={Backdrop}
+		    BackdropProps={{
+			timeout: 200,
+		    }}
+		>
+		    <Fade in={searching}>
+			<Box sx={searchStyle}>
+			    {/*<ModalContent node={curNode} />*/}
+			    <Searcher />
 			</Box>
 		    </Fade>
 		</Modal>
