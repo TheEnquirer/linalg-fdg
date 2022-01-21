@@ -2,8 +2,11 @@ import { useReducer, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import update from "react-addons-update";
 
-import data from './data';
 import { supabase_url, supabase_pubkey } from './secrets';
+import data from './data';
+console.log(data)
+
+setTimeout(() => console.log(data), 1000);
 
 const client = createClient(supabase_url, supabase_pubkey);
 data.nodes.forEach(n => addNode(n));
@@ -71,18 +74,19 @@ export async function updateEdge(obj) {
 
 function useDatabase() {
     function reducer(state, action) {
-        console.log('reduce', state, action);
+        console.log('reducing', state, action)
         switch (action.eventType) {
             case "INSERT": return update(state, { [action.table]: { $push: [action.new] } });
             case "UPDATE":
                 switch (action.table) {
                     case "nodes": return { nodes: state.nodes.map(v => v.id == action.old.id ? action.new : v) };
                     case "edges": return { edges: state.edges.map(v =>
-                        v.source == action.old.source && v.target == action.old.target ?
+                        (v.source == action.old.source && v.target == action.old.target) ?
                         action.new : v
                     ) };
                 }
         }
+        console.log('after reduce', state)
         return state;
     }
     const [ data_state, dispatch ] = useReducer(reducer, data);
