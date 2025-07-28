@@ -14,6 +14,7 @@ import NodeAdder from './NodeAdder';
 
 //import data from '../data'
 import useData, { addNode, updateNode, addLink, updateLink } from '../db';
+import staticData from '../data';
 //import data from '../data'
 //import data, { addNode, updateNode, addEdge, updateEdge } from '../db';
 import { BsSearch } from 'react-icons/bs';
@@ -75,7 +76,18 @@ const Graph = (props) => {
     const [open, setOpen] = useState(false);
     const [searching, setSearching] = useState(false);
     const [curNode, setCurNode] = useState(null);
-    const data = useData();
+
+    //const data = useData();
+    const [data, setData] = useState({"nodes": [], "links": []});
+
+    useEffect(() => {
+	let onlyNodes = structuredClone(staticData)
+	onlyNodes.links = []
+
+	setTimeout(() => setData(onlyNodes), 200);
+	setTimeout(() => setData(staticData), 600);
+    }, []);
+
     const [adding, setAdding] = useState(false);
     const handleOpen = (e) => {
 	//console.log(e)
